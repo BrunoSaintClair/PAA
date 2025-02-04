@@ -1,0 +1,36 @@
+A empresa de automação portuária Poxim Tech está
+desenvolvendo um sistema para movimentação
+automatizada dos contêineres de carga de origem
+internacional no Porto de Sergipe para maximizar a
+eficiência da fiscalização aduaneira
+
+Todos os contêineres possuem um cadastro eletrônico
+contendo informações sobre o código do contêiner, o CNPJ
+da empresa importadora e o peso líquido em quilos
+
+A inspeção dos contêineres é realizada sempre que existe
+alguma divergência entre as informações cadastradas,
+como o CNPJ informado ou a diferença percentual maior
+do que 10% no peso líquido
+
+Na triagem dos contêineres são fiscalizados os contêineres
+com a seguinte ordem de prioridade:
+1. Divergência de CNPJ
+2. Maior diferença percentual de peso líquido
+
+
+Formato de arquivo de entrada:
+
+[#n conteineres cadastrados]
+[Código 1][CNPJ 1][Peso 1]
+...
+[Código n][CNPJ n][Peso n]
+[#m conteineres selecionados]
+[Código 1][CNPJ 1][Peso 1]
+...
+[Código m][CNPJ m][Peso m]
+
+
+Formato de arquivo de saída:
+
+A sequência de fiscalização dos contêineres do navio, com a causa da triagem e seguindo a ordem de cadastramento.
