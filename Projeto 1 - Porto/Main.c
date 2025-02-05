@@ -53,12 +53,13 @@ Container* search(char *codigo){
     return NULL;
 }
 
-float getDiferencaPercentual(int peso_c1, int peso_c2) {
-    return (fabs(peso_c1 - peso_c2) / (float)peso_c1) * 100.0f;
+int getDiferencaPercentual(int peso_c1, int peso_c2) {
+    float diff = (fabs(peso_c1 - peso_c2) / (float)peso_c1) * 100;
+    return (roundf(diff));
 }
 
 bool excedeLimitePeso(int peso_c1, int peso_c2){
-    return getDiferencaPercentual(peso_c1, peso_c2) > 10.5;
+    return getDiferencaPercentual(peso_c1, peso_c2) > 10;
 }
 
 int compararPorIndice(const void* a, const void* b) {
@@ -77,8 +78,8 @@ int indiceEsquerdo = inicio, indiceDireito = meio + 1, indiceAuxiliar = inicio;
         Container* containerOriginalEsquerdo = search(containerEsquerdo->codigo);
         Container* containerOriginalDireito = search(containerDireito->codigo);
 
-        float diferencaEsquerda = getDiferencaPercentual(containerOriginalEsquerdo->peso, containerEsquerdo->peso);
-        float diferencaDireita = getDiferencaPercentual(containerOriginalDireito->peso, containerDireito->peso);
+        int diferencaEsquerda = getDiferencaPercentual(containerOriginalEsquerdo->peso, containerEsquerdo->peso);
+        int diferencaDireita = getDiferencaPercentual(containerOriginalDireito->peso, containerDireito->peso);
         
         if (diferencaEsquerda > diferencaDireita || 
             (diferencaEsquerda == diferencaDireita && containerOriginalEsquerdo->indice < containerOriginalDireito->indice)) {
@@ -176,9 +177,9 @@ for (int i = 0; i < n_containers_cadastrados; i++) {
         Container c2 = containers_peso_errado[i];
 
         int diferenca_absoluta = abs(c1.peso - c2.peso);
-        float diferenca_percentual = getDiferencaPercentual(c1.peso, c2.peso);
+        int diferenca_percentual = getDiferencaPercentual(c1.peso, c2.peso);
 
-        fprintf(output, "%s:%dkg(%.0f%%)\n", c1.codigo, diferenca_absoluta, diferenca_percentual);
+        fprintf(output, "%s:%dkg(%d%%)\n", c1.codigo, diferenca_absoluta, diferenca_percentual);
     }
 
     free(containers_cnpj_errado);
